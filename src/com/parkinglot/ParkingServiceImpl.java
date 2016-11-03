@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class ParkingServiceImpl implements ParkingService {
 
-    private static final Map<Integer, ParkingSlot> parkingSlotMap = new TreeMap<>();
+    private static final Map<Integer, ParkingSlot> parkingSlotMap = new HashMap<>();
     private static final List<ParkingSlot> emptyParkingSlots = new ArrayList<>();
     private static final Map<String, List<ParkingSlotInfo>> colorVsParkingSlotInfo = new HashMap<>();
     private static final Map<String, ParkingSlotInfo> registeryNumberVsParkingSlotInfo = new HashMap<>();
@@ -82,8 +82,9 @@ public class ParkingServiceImpl implements ParkingService {
     @Override
     public List<ParkingSlotInfo> getStatus() {
         List<ParkingSlotInfo> parkingSlotInfos = new ArrayList<>();
-        for(Map.Entry<Integer, ParkingSlot> parkingSlotEntry:parkingSlotMap.entrySet()){
-            parkingSlotInfos.add(parkingSlotEntry.getValue().getParkingSlotInfo());
+        for(int index=0;index<parkingSlotMap.size(); index++){
+            ParkingSlot parkingSlot = parkingSlotMap.get(index+1);
+            parkingSlotInfos.add(parkingSlot.getParkingSlotInfo());
         }
         return parkingSlotInfos;
     }
