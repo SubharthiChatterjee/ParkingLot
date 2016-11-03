@@ -19,7 +19,7 @@ public class ParkingServiceImpl implements ParkingService {
     @Override
     public String parkVehicle(Car car) {
         if(emptyParkingSlots.isEmpty())
-            return "Sorry, parking lot is full";
+            return null;
 
         ParkingSlot parkingSlot = emptyParkingSlots.get(0);
         ParkingSlotInfo parkingSlotInfo = new ParkingSlotInfo(parkingSlot.getParkingSlotNumber(),car);
@@ -34,7 +34,7 @@ public class ParkingServiceImpl implements ParkingService {
         parkingSlotInfos.add(parkingSlotInfo);
         colorVsParkingSlotInfo.put(car.getColor().toLowerCase(),parkingSlotInfos);
         registeryNumberVsParkingSlotInfo.put(car.getRegistrationNumber().toLowerCase(), parkingSlotInfo);
-        return "Allocated slot number: "+parkingSlot.getParkingSlotNumber();
+        return String.valueOf(parkingSlot.getParkingSlotNumber());
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ParkingServiceImpl implements ParkingService {
             parkingSlotMap.put(index+1,parkingSlot);
             emptyParkingSlots.add(parkingSlot);
         }
-        return "Created a parking lot with "+noOfslots+"slots";
+        return String.valueOf(noOfslots);
     }
 
     @Override
@@ -58,11 +58,11 @@ public class ParkingServiceImpl implements ParkingService {
             ParkingSlot parkingSlot1 = emptyParkingSlots.get(index);
             if(parkingSlot1.getParkingSlotNumber() > slot){
                 emptyParkingSlots.add(index, parkingSlot);
-                return "Slot number "+ slot +" is free";
+                return String.valueOf(slot);
             }
         }
         emptyParkingSlots.add(parkingSlot);
-        return "Slot number "+ slot +" is free";
+        return String.valueOf(slot);
     }
 
     @Override

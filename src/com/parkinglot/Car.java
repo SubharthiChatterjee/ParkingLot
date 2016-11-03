@@ -7,7 +7,15 @@ public class Car {
 
     private String registrationNumber;
     private String color;
-    private String vehicleType;
+
+    public Car(){
+
+    }
+
+    public Car(String registrationNumber, String color){
+        this.registrationNumber = registrationNumber;
+        this.color = color;
+    }
 
     public String getRegistrationNumber() {
         return registrationNumber;
@@ -25,20 +33,12 @@ public class Car {
         this.color = color;
     }
 
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
-    }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Car{");
         sb.append("registrationNumber='").append(registrationNumber).append('\'');
         sb.append(", color='").append(color).append('\'');
-        sb.append(", vehicleType='").append(vehicleType).append('\'');
         sb.append('}');
         return sb.toString();
     }
