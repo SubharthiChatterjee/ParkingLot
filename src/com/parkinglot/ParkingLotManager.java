@@ -1,7 +1,6 @@
 package com.parkinglot;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class ParkingLotManager {
         String line;
         try {
             while ((line = br.readLine()) != null) {
-                if(line.equals(""))
+                if (line.equals(""))
                     continue;
                 String[] command = line.split(" ");
                 ParkingLotConstants.ParkingLotCommand parkingLotCommand = ParkingLotConstants.ParkingLotCommand
@@ -35,7 +34,7 @@ public class ParkingLotManager {
                     parkingLotCommandArgs.add(command[index]);
                 parkingLotCommand.execute(parkingLotCommandArgs.toArray(new String[parkingLotCommandArgs.size()]));
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
