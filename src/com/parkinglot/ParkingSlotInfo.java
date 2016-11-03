@@ -41,4 +41,21 @@ public class ParkingSlotInfo {
         sb.append('}');
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ParkingSlotInfo that = (ParkingSlotInfo) o;
+
+        if (!slotNumber.equals(that.slotNumber)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return slotNumber.hashCode();
+    }
 }

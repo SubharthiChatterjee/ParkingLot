@@ -51,6 +51,7 @@ public class ParkingServiceImpl implements ParkingService {
     @Override
     public String vacateParkingSlot(Integer slot) {
         ParkingSlot parkingSlot = parkingSlotMap.get(slot);
+        ParkingSlotInfo parkingSlotInfo = parkingSlot.getParkingSlotInfo();
         parkingSlot.setIsEmpty(Boolean.TRUE);
         parkingSlot.setParkingSlotInfo(null);
         parkingSlotMap.put(parkingSlot.getParkingSlotNumber(), parkingSlot);
@@ -58,11 +59,24 @@ public class ParkingServiceImpl implements ParkingService {
             ParkingSlot parkingSlot1 = emptyParkingSlots.get(index);
             if(parkingSlot1.getParkingSlotNumber() > slot){
                 emptyParkingSlots.add(index, parkingSlot);
+                invalidate(parkingSlotInfo);
                 return String.valueOf(slot);
             }
         }
         emptyParkingSlots.add(parkingSlot);
+        invalidate(parkingSlotInfo);
         return String.valueOf(slot);
+    }
+
+    private void invalidate(ParkingSlotInfo parkingSlotInfo){
+        if(parkingSlotInfo != null) {
+            List<ParkingSlotInfo> parkingSlotInfos = colorVsParkingSlotInfo.get(parkingSlotInfo.getCar().getColor().toLowerCase());
+            if (parkingSlotInfos != null && !parkingSlotInfos.isEmpty()) {
+                parkingSlotInfos.remove(parkingSlotInfo);
+                colorVsParkingSlotInfo.put(parkingSlotInfo.getCar().getColor().toLowerCase(), parkingSlotInfos);
+            }
+            registeryNumberVsParkingSlotInfo.remove(parkingSlotInfo.getCar().getRegistrationNumber().toLowerCase());
+        }
     }
 
     @Override
